@@ -9,6 +9,8 @@ import {
 } from 'react-native'
 import Header from './components/Header/Header';
 
+const headerTitle = "TO DO"
+
 export default class Main extends Component {
     
     render(){
@@ -16,7 +18,7 @@ export default class Main extends Component {
             <View  style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 <View style={styles.centered}>
-                    <Header title="To Do" />
+                    <Header title={headerTitle} />
                 </View>
             </View>
         )
