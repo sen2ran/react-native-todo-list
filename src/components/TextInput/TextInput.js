@@ -7,7 +7,7 @@ import {
     inputPlaceholder
 } from '../../utils/Colors'
 
-const Input = ({inputValue , onChangeText }) => (
+const Input = ({inputValue , onChangeText,onDoneAddItem }) => (
     <TextInput
         style={styles.input}
         value={inputValue}
@@ -22,7 +22,7 @@ const Input = ({inputValue , onChangeText }) => (
         returnKeyType="done"
         autoCorrect={false}
         blurOnSubmit={true}
-        // onSubmitEditing={onDoneAddItem}
+        onSubmitEditing={onDoneAddItem}
     />
 )
 

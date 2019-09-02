@@ -25,31 +25,35 @@ const {
 } = Dimensions.get('window');
 
 class List extends Component{
+
+    componentDidMount= () => {
+       console.log(this.props);
+       
+    }
+
+
     render(){
         const { text, deleteItem, id, isCompleted } = this.props;
         return(
             <View style={styles.container}>
                 <View style={styles.coloum}>
                     <TouchableOpacity>
-                        <View>
-                            style={[
+                        <View style={[
                                 styles.circle,
-                                isCompleted ? {borderColor: circleActive } : {borderColor: circleInactive }
-                            ]}
-                        </View>
+                                {borderColor: circleActive } : {borderColor: circleInactive }
+                            ]}/>
                     </TouchableOpacity>
                     <Text
                         style={[
-                            styles.text,
                             isCompleted 
                             ?{color: itemListTextStrike,textDecorationLine: 'line-through'} 
                             :{color : itemListText}
                         ]}
                     >
-                        {text}
+                        {text} 
                     </Text>
                 </View>
-                {
+                {/* {
                     isCompleted 
                     ? (
                         <View style={styles.button}>
@@ -63,7 +67,7 @@ class List extends Component{
                         </View>
                         ) 
                     : null
-                }
+                } */}
             </View>
         )
     }
