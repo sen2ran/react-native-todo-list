@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import {
     StyleSheet,
-    Text,
-    TextInput,
+    ScrollView,
     View,
     StatusBar
 } from 'react-native'
 import Header from './components/Header/Header';
 import Input from './components/TextInput/TextInput';
+import List from './components/List/List'
 // import {
 //     inputPlaceholder
 // } from '../src/utils/Colors'
@@ -19,7 +19,8 @@ const headerTitle = "TO DO"
 
 export default class Main extends Component {
     state = {
-        inputValue : ""
+        inputValue : "",
+        allItems :{}
     }
 
     newInputValue = value =>{
@@ -32,8 +33,22 @@ export default class Main extends Component {
     render(){
 
         const {
-            inputValue
+            inputValue,
+            allItems
         } = this.state;
+
+        const allListView = Object.values(allItems)
+                            .reverse()
+                            .map(item => (
+                                <List
+                                    key={item.id}
+                                    {...item}
+                                    deleteItem={this.deleteItem}
+                                    completeItem={this.completeItem}
+                                    incompleteItem={this.incompleteItem}
+                                />
+                            ))
+        
 
         return(
             <View  style={styles.container}>
@@ -47,6 +62,11 @@ export default class Main extends Component {
                         onChangeText={this.newInputValue} 
                     />
                 </View>
+                <View style={styles.list}>
+                    <ScrollView contentContainerStyle={styles.scrollableList}>
+                        {allListView}
+                    </ScrollView>
+                </View>
             </View>
         )
     }
@@ -58,13 +78,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'coral'
     },
     centered :{
-        // flex : 1,
         backgroundColor: '#CC6640',
         alignItems : "center"
     },
     inputContainer :{
-        // flex : 5,
         marginTop : 40,
         paddingLeft : 15
     },
+    list :{
+       flex : 1,
+       marginTop : 70,
+       paddingLeft : 15,
+       marginBottom : 10 
+    },
+    scrollableList :{
+        marginTop : 15
+    }
 })
