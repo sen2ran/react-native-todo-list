@@ -26,21 +26,33 @@ const {
 
 class List extends Component{
 
-    componentDidMount= () => {
-       console.log(this.props);
-       
+    // componentDidMount= () => { 
+    // }
+    onToggleCircle = () => {
+        const {
+            isCompleted,
+            id,
+            completeItem,
+            incompleteItem
+        } = this.props;
+        if (isCompleted) {
+            incompleteItem(id);
+        } else {
+            completeItem(id);
+        }
     }
-
-
+    
     render(){
         const { text, deleteItem, id, isCompleted } = this.props;
         return(
             <View style={styles.container}>
                 <View style={styles.coloum}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.onToggleCircle}>
                         <View style={[
                                 styles.circle,
-                                {borderColor: circleActive } : {borderColor: circleInactive }
+                                isCompleted 
+                                ? {borderColor: circleActive } 
+                                : {borderColor: circleInactive }
                             ]}/>
                     </TouchableOpacity>
                     <Text
@@ -53,11 +65,13 @@ class List extends Component{
                         {text} 
                     </Text>
                 </View>
-                {/* {
+                {
                     isCompleted 
                     ? (
                         <View style={styles.button}>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPressOut={ () => deleteItem(id)}
+                            >
                                 <MaterialIcons
                                     name="delete-forever"
                                     size={24}
@@ -66,8 +80,8 @@ class List extends Component{
                             </TouchableOpacity>
                         </View>
                         ) 
-                    : null
-                } */}
+                    :null
+                }
             </View>
         )
     }

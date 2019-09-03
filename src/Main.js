@@ -72,6 +72,7 @@ export default class Main extends Component {
         }
     };
     deleteItem = id => {
+        // alert(id)
         this.setState(prevState => {
             const allItems = prevState.allItems;
             delete allItems[id];
